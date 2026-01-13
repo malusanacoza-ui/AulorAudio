@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Song>
+﻿@using AulorAudio.Models
+@model IEnumerable<Song>
 
 <h2>🎧 AulorAudio Music Library</h2>
 
@@ -8,10 +9,9 @@
         <div class="col-md-4">
             <div class="card mb-4 shadow">
 
-                @if (!string.IsNullOrEmpty(song.CoverImage))
-                {
-                    <img src="@song.CoverImage" class="card-img-top" style="height:250px; object-fit:cover;" />
-                }
+                <img src="@song.CoverImage"
+                     class="card-img-top"
+                     style="height:250px; object-fit:cover;" />
 
                 <div class="card-body">
                     <h5>@song.Title</h5>
@@ -21,7 +21,9 @@
                         <source src="@song.FilePath" type="audio/mpeg" />
                     </audio>
 
-                    <a class="btn btn-success w-100 mt-2" href="@song.FilePath" download>
+                    <a class="btn btn-success w-100 mt-2"
+                       asp-action="Download"
+                       asp-route-file="@System.IO.Path.GetFileName(song.FilePath)">
                         ⬇ Download
                     </a>
                 </div>
@@ -30,5 +32,3 @@
         </div>
     }
 </div>
-
-<a asp-action="Create" class="btn btn-primary mt-3">Upload New Song</a>

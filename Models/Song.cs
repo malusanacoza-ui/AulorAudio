@@ -1,12 +1,11 @@
-﻿public class Song
+﻿namespace AulorAudio.Models
 {
-    public int Id { get; set; }
-
-    public string Title { get; set; }
-    public string Artist { get; set; }
-
-    public string FilePath { get; set; }   // where MP3 is stored
-    public string CoverImage { get; set; } // optional album cover
-
-    public DateTime UploadDate { get; set; } = DateTime.Now;
+    public class Song
+    {
+        public int Id { get; set; }           // generated in-memory
+        public string Title { get; set; }
+        public string Artist { get; set; }
+        public string FilePath { get; set; }
+        public string CoverImage { get; set; }
+    }
 }
