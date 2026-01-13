@@ -2,30 +2,29 @@
     ViewData["Title"] = "Home";
 }
 
-<div class="text-center mt-5">
-    <h1 class="display-4">
-        🎵 Welcome to <strong>AulorAudio</strong>
-    </h1>
+<div class="full-page-hero">
 
-    <p class="lead mt-3">
-        Stream, favourite, and download your favourite music anytime.
-    </p>
+    <div class="album-wall">
+        <div class="album-track">
+            <img src="/images/khari.jpg" />
+            <img src="/images/kharishma.jpg" />
+            <img src="/images/mabhoso.jpg" />
+            <img src="/images/mimi.jpg" />
+            <img src="/images/nelly.jpg" />
+            <img src="/images/shandi.jpg" />
+            <img src="/images/shandesh.jpg" />
+            <img src="/images/mabhoso.jpg" />
+        </div>
+    </div>
 
-    <div class="mt-4">
-        <a class="btn btn-primary btn-lg m-2"
-           asp-controller="Songs"
-           asp-action="Index">
-            🎧 Browse Music
-        </a>
+    <div class="album-overlay">
+        <div class="hero-content">
+            <h1><span>AULORAUDIO</span></h1>
+            <p>Stream & download your favorite tracks</p>
 
-        @if (!User.Identity.IsAuthenticated)
-        {
-            <a class="btn btn-outline-secondary btn-lg m-2"
-               asp-area="Identity"
-               asp-page="/Account/Login">
-                🔐 Login to Download
+            <a asp-controller="Songs" asp-action="Index" class="btn-music">
+                Open Player
             </a>
-        }
+        </div>
     </div>
 </div>
-

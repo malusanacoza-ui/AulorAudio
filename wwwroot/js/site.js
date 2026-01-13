@@ -1,4 +1,12 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("audio").forEach(audio => {
+        audio.addEventListener("loadedmetadata", () => {
+            const duration = audio.duration;
+            const min = Math.floor(duration / 60);
+            const sec = Math.floor(duration % 60).toString().padStart(2, "0");
 
-// Write your JavaScript code.
+            audio.parentElement.querySelector(".song-duration")
+                .innerText = `⏱ ${min}:${sec}`;
+        });
+    });
+});

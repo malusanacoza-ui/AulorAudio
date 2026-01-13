@@ -1,31 +1,155 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
+/* ===== GLOBAL DARK THEME ===== */
 
 body {
-  margin-bottom: 60px;
+    background-color: #121212;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+/* ===== SIDEBAR ===== */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 220px;
+    height: 100vh;
+    background-color: #000;
+    padding: 20px;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+    .sidebar h3 {
+        color: #1db954;
+        margin-bottom: 30px;
+    }
+
+    .sidebar a {
+        display: block;
+        color: #b3b3b3;
+        padding: 10px 0;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+        .sidebar a:hover {
+            color: white;
+        }
+
+/* ===== MAIN CONTENT ===== */
+
+.main-content {
+    margin-left: 220px;
+    padding: 30px;
 }
+
+/* ===== CARDS ===== */
+
+.card {
+    background-color: #181818;
+    border: none;
+    color: white;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+    .card:hover {
+        transform: scale(1.05);
+        background-color: #282828;
+    }
+
+    .card img {
+        height: 250px;
+        object-fit: cover;
+    }
+
+/* ===== AUDIO ===== */
+
+audio {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.song-duration {
+    display: block;
+    margin-top: 5px;
+    color: #b3b3b3;
+}
+
+/* ===== BUTTONS ===== */
+
+.btn-success {
+    background-color: #1db954;
+    border: none;
+}
+
+    .btn-success:hover {
+        background-color: #1ed760;
+    }
+
+/* ===== HOME HERO ===== */
+
+.full-page-hero {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.album-wall {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.album-track {
+    display: flex;
+    width: max-content;
+    animation: slideAlbums 30s linear infinite;
+}
+
+    .album-track img {
+        height: 260px;
+        margin-right: 20px;
+        border-radius: 10px;
+        opacity: 0.4;
+    }
+
+@keyframes slideAlbums {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.album-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), #121212);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-content {
+    text-align: center;
+}
+
+    .hero-content h1 span {
+        color: #1db954;
+        font-size: 4rem;
+    }
+
+.btn-music {
+    margin-top: 20px;
+    padding: 12px 30px;
+    background: #1db954;
+    color: black;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+    .btn-music:hover {
+        background: #1ed760;
+    }
