@@ -83,37 +83,52 @@ namespace AulorAudio.Controllers
         // POST: Songs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Artist,FilePath,CoverImage,UploadDate")] Song song)
+        public async Task<IActionResult> Create(Song song, IFormFile mp3File, IFormFile coverImage)
         {
-            if (id != song.Id)
+            if (!ModelState.IsValid)
+                return View(song);
+
+            // Save MP3
+            if (mp3File != null)
             {
-                return NotFound();
+                string musicPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/music");
+                Directory.CreateDirectory(musicPath);
+
+                string fileName = Guid.NewGuid() + Path.GetExtension(mp3File.FileName);
+                string fullPath = Path.Combine(musicPath, fileName);
+
+                using var stream = new FileStream(fullPath, FileMode.Create);
+                await mp3File.CopyToAsync(stream);
+
+                song.FilePath = "/music/" + fileName;
             }
 
-            if (ModelState.IsValid)
+            // Save Cover Image
+            if (coverImage != null)
             {
-                try
-                {
-                    _context.Update(song);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!SongExists(song.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                string coverPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/covers");
+                Directory.CreateDirectory(coverPath);
+
+                string imgName = Guid.NewGuid() + Path.GetExtension(coverImage.FileName);
+                string imgFullPath = Path.Combine(coverPath, imgName);
+
+                using var stream = new FileStream(imgFullPath, FileMode.Create);
+                await coverImage.CopyToAsync(stream);
+
+                song.CoverImage = "/covers/" + imgName;
             }
-            return View(song);
+
+            song.UploadDate = DateTime.Now;
+
+            _context.Add(song);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
+
 
         // GET: Songs/Delete/5
         public async Task<IActionResult> Delete(int? id)
