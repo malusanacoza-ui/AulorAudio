@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using AulorAudio.Models;
 
 namespace AulorAudio.Controllers
@@ -12,7 +13,9 @@ namespace AulorAudio.Controllers
             _env = env;
         }
 
-        // GET: Songs
+        // ============================
+        // GET: Songs (PUBLIC)
+        // ============================
         public IActionResult Index()
         {
             var musicDir = Path.Combine(_env.WebRootPath, "music");
@@ -31,7 +34,7 @@ namespace AulorAudio.Controllers
                         Title = Path.GetFileNameWithoutExtension(file),
                         Artist = "Unknown Artist",
                         FilePath = "/music/" + fileName,
-                        CoverImage = "/images/wave.jpg" // default cover
+                        CoverImage = "/images/default-cover.jpg" // fixed cover
                     };
                 })
                 .ToList();
@@ -39,12 +42,16 @@ namespace AulorAudio.Controllers
             return View(songs);
         }
 
-        // ⬇ DOWNLOAD
+        // ============================
+        // DOWNLOAD (LOGIN REQUIRED)
+        // ============================
+        [Authorize]
         public IActionResult Download(string file)
         {
             if (string.IsNullOrWhiteSpace(file))
                 return BadRequest();
 
+            // Prevent path traversal
             file = Path.GetFileName(file);
 
             var path = Path.Combine(_env.WebRootPath, "music", file);

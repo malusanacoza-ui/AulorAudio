@@ -1,4 +1,6 @@
-/* ===== GLOBAL DARK THEME ===== */
+/* ===============================
+   GLOBAL DARK THEME
+================================ */
 
 body {
     background-color: #121212;
@@ -6,7 +8,9 @@ body {
     font-family: 'Segoe UI', sans-serif;
 }
 
-/* ===== SIDEBAR ===== */
+/* ===============================
+   SIDEBAR
+================================ */
 
 .sidebar {
     position: fixed;
@@ -16,6 +20,7 @@ body {
     height: 100vh;
     background-color: #000;
     padding: 20px;
+    z-index: 100;
 }
 
     .sidebar h3 {
@@ -28,27 +33,54 @@ body {
         color: #b3b3b3;
         padding: 10px 0;
         text-decoration: none;
-        transition: color 0.3s;
+        transition: color 0.3s, transform 0.2s;
     }
 
         .sidebar a:hover {
             color: white;
+            transform: translateX(5px);
         }
 
-/* ===== MAIN CONTENT ===== */
+/* ===============================
+   LOGIN & REGISTER (WHITE BUTTONS)
+================================ */
+
+a[href*="Login"],
+a[href*="Register"] {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-radius: 30px;
+    padding: 8px 18px;
+    font-weight: 600;
+    margin-top: 10px;
+    display: inline-block;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+    a[href*="Login"]:hover,
+    a[href*="Register"]:hover {
+        background-color: #e6e6e6 !important;
+        transform: scale(1.05);
+    }
+
+/* ===============================
+   MAIN CONTENT
+================================ */
 
 .main-content {
     margin-left: 220px;
     padding: 30px;
 }
 
-/* ===== CARDS ===== */
+/* ===============================
+   CARDS
+================================ */
 
 .card {
     background-color: #181818;
     border: none;
     color: white;
-    transition: transform 0.3s, background-color 0.3s;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
     .card:hover {
@@ -56,12 +88,26 @@ body {
         background-color: #282828;
     }
 
-    .card img {
-        height: 250px;
-        object-fit: cover;
-    }
+/* ===============================
+   SONG COVER IMAGE (BRIGHTER)
+================================ */
 
-/* ===== AUDIO ===== */
+.card-img-top {
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    /* Brightness boost */
+    filter: brightness(1.3) contrast(1.15) saturate(1.15);
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover .card-img-top {
+    filter: brightness(1.4) contrast(1.2) saturate(1.2);
+}
+
+/* ===============================
+   AUDIO PLAYER
+================================ */
 
 audio {
     width: 100%;
@@ -72,46 +118,75 @@ audio {
     display: block;
     margin-top: 5px;
     color: #b3b3b3;
+    font-size: 0.9rem;
 }
 
-/* ===== BUTTONS ===== */
+/* ===============================
+   BUTTONS
+================================ */
 
 .btn-success {
     background-color: #1db954;
     border: none;
+    color: black;
+    font-weight: bold;
 }
 
     .btn-success:hover {
         background-color: #1ed760;
     }
 
-/* ===== HOME HERO ===== */
+/* Back button */
+.btn-outline-light {
+    border-color: #1db954;
+    color: #1db954;
+}
+
+    .btn-outline-light:hover {
+        background-color: #1db954;
+        color: black;
+    }
+
+/* ===============================
+   HOME HERO / SLIDING ALBUM WALL
+================================ */
+/* ===============================
+   HOME HERO / FULLSCREEN SLIDER
+================================ */
 
 .full-page-hero {
     height: 100vh;
+    width: 100vw;
     position: relative;
     overflow: hidden;
 }
 
+/* WALL CONTAINER */
 .album-wall {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    inset: 0;
+    overflow: hidden;
 }
 
+/* SLIDING TRACK */
 .album-track {
     display: flex;
+    height: 100%;
     width: max-content;
-    animation: slideAlbums 30s linear infinite;
+    animation: slideAlbums 35s linear infinite;
 }
 
+    /* IMAGES */
     .album-track img {
-        height: 260px;
-        margin-right: 20px;
-        border-radius: 10px;
-        opacity: 0.4;
+        height: 100vh;
+        width: 100vw;
+        object-fit: cover;
+        /* ?? BRIGHTER IMAGE */
+        filter: brightness(1.25) contrast(1.1) saturate(1.1);
+        opacity: 0.55;
     }
 
+/* ANIMATION */
 @keyframes slideAlbums {
     from {
         transform: translateX(0);
@@ -122,34 +197,51 @@ audio {
     }
 }
 
+/* DARK OVERLAY FOR TEXT */
 .album-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.8), #121212);
+    background: linear-gradient( to bottom, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.85) );
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+/* HERO TEXT */
 .hero-content {
     text-align: center;
+    z-index: 10;
 }
 
     .hero-content h1 span {
         color: #1db954;
-        font-size: 4rem;
+        font-size: 4.5rem;
+        letter-spacing: 3px;
     }
 
+    .hero-content p {
+        color: #e0e0e0;
+        font-size: 1.3rem;
+    }
+
+
+/* ===============================
+   HOME BUTTON
+================================ */
+
 .btn-music {
-    margin-top: 20px;
-    padding: 12px 30px;
+    margin-top: 25px;
+    padding: 12px 35px;
     background: #1db954;
     color: black;
     border-radius: 30px;
     text-decoration: none;
     font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
     .btn-music:hover {
         background: #1ed760;
+        transform: scale(1.05);
     }

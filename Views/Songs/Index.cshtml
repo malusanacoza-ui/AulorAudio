@@ -30,11 +30,23 @@
 
                     <span class="song-duration">⏱ Loading...</span>
 
-                    <a class="btn btn-success w-100 mt-2"
-                       asp-action="Download"
-                       asp-route-file="@System.IO.Path.GetFileName(song.FilePath)">
-                        ⬇ Download
-                    </a>
+                    @if (User.Identity != null && User.Identity.IsAuthenticated)
+                    {
+                        <a class="btn btn-success w-100 mt-2"
+                           asp-action="Download"
+                           asp-route-file="@System.IO.Path.GetFileName(song.FilePath)">
+                            ⬇ Download
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-area="Identity"
+                           asp-page="/Account/Login"
+                           class="btn btn-outline-light w-100 mt-2">
+                            🔒 Login to Download
+                        </a>
+                    }
+
                 </div>
 
             </div>
