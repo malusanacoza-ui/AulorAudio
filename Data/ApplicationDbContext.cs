@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 using AulorAudio.Models;   // ✅ THIS FIXES THE ERROR
 
 namespace AulorAudio.Data
@@ -15,6 +12,8 @@ namespace AulorAudio.Data
         }
 
         public DbSet<Song> Songs { get; set; }
+        public DbSet<SongLike> SongLikes { get; set; }
+        public DbSet<FavoriteSong> FavoriteSongs { get; set; }
     }
 }
 

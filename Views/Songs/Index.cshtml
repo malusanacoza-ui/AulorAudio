@@ -46,6 +46,21 @@
                             🔒 Login to Download
                         </a>
                     }
+                    <a asp-controller="SongActions"
+                       asp-action="Like"
+                       asp-route-file="@System.IO.Path.GetFileName(song.FilePath)"
+                       class="btn btn-outline-danger mt-2">
+                        ❤️ Like
+                    </a>
+
+                    <a asp-controller="SongActions"
+                       asp-action="Favorite"
+                       asp-route-file="@System.IO.Path.GetFileName(song.FilePath)"
+                       class="btn btn-outline-warning mt-2">
+                        ⭐ Favorite
+                    </a>
+
+
 
                 </div>
 
