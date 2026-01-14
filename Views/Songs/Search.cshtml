@@ -1,0 +1,50 @@
+﻿@model AulorAudio.Models.SongSearchViewModel
+
+<h2>Search Songs</h2>
+
+<form method="get" asp-action="Search" class="mb-3">
+    <input type="text"
+           name="query"
+           value="@Model.Query"
+           placeholder="Search by title or artist"
+           class="form-control" />
+
+    <button class="btn btn-success mt-2">
+        🔍 Search
+    </button>
+</form>
+
+<hr />
+
+@if (!Model.Songs.Any())
+{
+    <p>No songs found.</p>
+}
+else
+{
+    <div class="song-list">
+        @foreach (var song in Model.Songs)
+        {
+            <div class="song-item d-flex align-items-center mb-3">
+                <img src="@song.CoverImage"
+                     width="60"
+                     height="60"
+                     class="me-3 rounded" />
+
+                <div>
+                    <strong>@song.Title</strong><br />
+                    <small>@song.Artist</small>
+                </div>
+            </div>
+        }
+    </div>
+}
+<script>
+    let timeout;
+    document.querySelector('input[name="query"]').addEventListener('input', function () {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            this.form.submit();
+        }, 400);
+    });
+</script>

@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AulorAudio.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using AulorAudio.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace AulorAudio.Controllers
 {
@@ -63,5 +64,49 @@ namespace AulorAudio.Controllers
 
             return PhysicalFile(path, "audio/mpeg", file);
         }
+
+
+        public IActionResult Search(string query)
+        {
+            var musicDir = Path.Combine(_env.WebRootPath, "music");
+
+            if (!Directory.Exists(musicDir))
+                return View(new SongSearchViewModel());
+
+            var songs = Directory.GetFiles(musicDir, "*.mp3")
+                .Select((file, index) =>
+                {
+                    var fileName = Path.GetFileName(file);
+
+                    return new Song
+                    {
+                        Id = index + 1,
+                        Title = Path.GetFileNameWithoutExtension(file),
+                        Artist = "Unknown Artist",
+                        FilePath = "/music/" + fileName,
+                        CoverImage = "/images/default-cover.jpg"
+                    };
+                })
+                .AsQueryable();
+
+            // 🔍 Apply search
+            if (!string.IsNullOrWhiteSpace(query))
+            {
+                songs = songs.Where(s =>
+                    s.Title.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+                    s.Artist.Contains(query, StringComparison.OrdinalIgnoreCase));
+            }
+
+            var model = new SongSearchViewModel
+            {
+                Query = query,
+                Songs = songs.ToList()
+            };
+
+            return View(model);
+        }
+ 
     }
+
 }
+
