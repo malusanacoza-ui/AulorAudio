@@ -46,12 +46,16 @@
                             🔒 Login to Download
                         </a>
                     }
-                    <a asp-controller="SongActions"
-                       asp-action="Like"
-                       asp-route-file="@System.IO.Path.GetFileName(song.FilePath)"
-                       class="btn btn-outline-danger mt-2">
-                        ❤️ Like
-                    </a>
+                    @{
+                        var file = System.IO.Path.GetFileName(song.FilePath);
+                    }
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <span class="like-container" data-file="@file">
+                            <a class="btn btn-outline-danger like-btn">❤️ Like</a>
+                        </span>
+                    }
 
                     <a asp-controller="SongActions"
                        asp-action="Favorite"
@@ -68,3 +72,31 @@
         </div>
     }
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        document.querySelectorAll(".like-container").forEach(el => {
+            let file = el.dataset.file;
+
+            fetch("/SongActions/LikedFiles")
+                .then(r => r.json())
+                .then(liked => {
+                    if (liked.includes(file)) {
+                        el.innerHTML = '<span class="btn btn-danger">❤️ Liked</span>';
+                    }
+                });
+        });
+
+        document.querySelectorAll(".like-btn").forEach(btn => {
+            btn.addEventListener("click", function () {
+                let file = this.parentElement.dataset.file;
+
+                fetch(`/SongActions/Like?file=${file}`)
+                    .then(() => {
+                        this.parentElement.innerHTML = '<span class="btn btn-danger">❤️ Liked</span>';
+                    });
+            });
+        });
+    });
+</script>
+

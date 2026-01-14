@@ -16,6 +16,12 @@
         <a asp-controller="Home" asp-action="Index">🏠 Home</a>
         <a asp-controller="Songs" asp-action="Index">🎵 Songs</a>
         <a asp-controller="Home" asp-action="Privacy">🔒 Privacy</a>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a class="nav-link" asp-controller="SongActions" asp-action="MyFavorites">
+                ⭐ My Favorites
+            </a>
+        }
         <partial name="_LoginPartial" />
     </div>
 

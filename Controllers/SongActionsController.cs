@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AulorAudio.Data;
+using AulorAudio.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using AulorAudio.Data;
-using AulorAudio.Models;
+using Microsoft.EntityFrameworkCore;
+
+
 
 namespace AulorAudio.Controllers
 {
@@ -57,5 +60,33 @@ namespace AulorAudio.Controllers
 
             return RedirectToAction("Index", "Songs");
         }
+        public async Task<IActionResult> MyFavorites()
+        {
+            var userId = _userManager.GetUserId(User);
+
+            var files = await _context.FavoriteSongs
+                .Where(f => f.UserId == userId)
+                .Select(f => f.SongFile)
+                .ToListAsync();
+
+            return View(files);
+        }
+        public bool IsLiked(string file, string userId)
+        {
+            return _context.SongLikes.Any(l => l.SongFile == file && l.UserId == userId);
+        }
+        [Authorize]
+        public IActionResult LikedFiles()
+        {
+            var userId = _userManager.GetUserId(User);
+
+            var liked = _context.SongLikes
+                .Where(l => l.UserId == userId)
+                .Select(l => l.SongFile)
+                .ToList();
+
+            return Json(liked);
+        }
+
     }
 }
