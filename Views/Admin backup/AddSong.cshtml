@@ -1,0 +1,30 @@
+﻿@model AulorAudio.Models.Song
+@{
+    Layout = "_Layout";
+}
+
+<h2>Add New Song</h2>
+
+<form asp-action="AddSong" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="Title">Song Title</label>
+        <input type="text" class="form-control" id="Title" name="Title" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Artist">Artist</label>
+        <input type="text" class="form-control" id="Artist" name="Artist" required />
+    </div>
+
+    <div class="form-group">
+        <label for="FilePath">Song File</label>
+        <input type="file" class="form-control" id="FilePath" name="songFile" required />
+    </div>
+
+    <div class="form-group">
+        <label for="CoverImage">Cover Image</label>
+        <input type="file" class="form-control" id="CoverImage" name="coverImage" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Song</button>
+</form>
