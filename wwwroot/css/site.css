@@ -288,3 +288,48 @@ audio {
         transform: scale(1.1);
         box-shadow: 0 0 40px rgba(29,185,84,1);
     }
+/* ===============================
+   CARD TEXT VISIBILITY FIX
+================================ */
+
+.card {
+    position: relative;
+    overflow: hidden;
+}
+
+    /* Dark glass layer over the image */
+    .card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.3), rgba(0,0,0,0.1));
+        z-index: 1;
+    }
+
+    /* Everything inside card should be above overlay */
+    .card * {
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Force all card text to white */
+    .card,
+    .card p,
+    .card span,
+    .card small,
+    .card h5,
+    .card h6,
+    .card .song-title,
+    .card .song-artist,
+    .card .song-duration {
+        color: #ffffff !important;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    }
+
+        /* Improve spacing of text area */
+        .card .card-body {
+            padding: 15px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 0 0 12px 12px;
+        }
+
