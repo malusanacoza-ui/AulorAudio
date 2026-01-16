@@ -26,19 +26,28 @@ else
         @foreach (var song in Model.Songs)
         {
             <div class="song-item d-flex align-items-center mb-3">
+
                 <img src="@song.CoverImage"
                      width="60"
                      height="60"
                      class="me-3 rounded" />
 
-                <div>
+                <div class="flex-grow-1">
                     <strong>@song.Title</strong><br />
                     <small>@song.Artist</small>
+
+                    <!-- ✅ ADD THIS -->
+                    <audio controls class="w-100 mt-2">
+                        <source src="@song.FilePath" type="audio/mpeg" />
+                        Your browser does not support the audio element.
+                    </audio>
                 </div>
+
             </div>
         }
     </div>
 }
+
 <script>
     let timeout;
     document.querySelector('input[name="query"]').addEventListener('input', function () {
