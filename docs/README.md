@@ -9,7 +9,7 @@ Users can browse, search, stream, and download music, while administrators manag
 - User registration and login with role-based access
 - Browse songs by title, artist, or genre
 - Stream songs directly in the browser using an HTML5 audio player
-- Download songs for offline use
+- Download songs
 - Admin dashboard to add, edit, and delete songs
 - Upload and manage cover images for songs
 - Playlist management (optional enhancement)
