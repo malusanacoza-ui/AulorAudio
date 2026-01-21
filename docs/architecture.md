@@ -2,7 +2,7 @@
 
 ## Architecture Pattern
 - **ASP.NET Core MVC (Model–View–Controller)**
-  - **Model:** Entity Framework Core models representing Songs, Users, Genres, Playlists, and related entities.
+  - **Model:** Entity Framework Core models representing Songs, Users, Favorites, Likes, and related entities.
   - **View:** Razor pages for UI (song lists, search, streaming player, downloads)
   - **Controller:** Handles user requests, invokes services, and returns views or JSON.
 
@@ -18,6 +18,7 @@
 ### Application / Business Logic Layer
 - **Services:** Handle operations such as:
   - Song management (add, edit, delete)
+  - Favorite and like handling
   - Playlist creation and management
   - Search functionality
   - Streaming and download logic
@@ -26,7 +27,7 @@
 ### Data Access Layer
 - **Entity Framework Core**
   - Handles database CRUD operations.
-  - Uses `DbContext` to manage songs, users, playlists, and genres.
+  - Uses `DbContext` to manage songs, users, playlists, favorites, and likes.
 - **Database:** SQL Server for structured data storage.
 
 ---
@@ -36,7 +37,7 @@
   - User registration and login
   - Role-based authorization:
     - **Admin:** can manage songs and content.
-    - **User:** can browse, stream, and download songs.
+    - **User:** can browse, stream, like, favorite, and download songs.
 - **Security Measures:**
   - Password hashing
   - CSRF protection
@@ -63,20 +64,16 @@
 
 ---
 
-## Optional Enhancements
-- Caching popular songs for faster streaming
-- Asynchronous loading of song lists
-- Logging user activity with Serilog
-- API endpoints for future mobile apps
-
----
 
 # Entity Relationship Diagram — AulorAudio
 
 ```mermaid
 erDiagram
     USER ||--o{ PLAYLIST : owns
-    USER ||--o{ SONG_DOWNLOAD : downloads
+    USER ||--o{ FAVORITE_SONG : favorites
+    USER ||--o{ SONG_LIKE : likes
+    SONG ||--o{ FAVORITE_SONG : favorited_in
+    SONG ||--o{ SONG_LIKE : liked_in
     SONG }o--|| GENRE : belongs_to
     SONG ||--o{ PLAYLIST_ITEM : included_in
     PLAYLIST ||--o{ PLAYLIST_ITEM : contains
@@ -113,9 +110,16 @@ erDiagram
         int SongId
     }
 
-    SONG_DOWNLOAD {
+    FAVORITE_SONG {
         int Id
         int UserId
         int SongId
-        datetime DownloadedAt
+        datetime FavoritedAt
+    }
+
+    SONG_LIKE {
+        int Id
+        int UserId
+        int SongId
+        datetime LikedAt
     }
