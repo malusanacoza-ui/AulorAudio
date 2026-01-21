@@ -1,11 +1,11 @@
-﻿# 🎵 AulorAudio – Music Streaming Web Application
+﻿# AulorAudio – Music Streaming Web Application
 
 A music streaming and download web application built with **ASP.NET Core MVC**.  
 Users can browse, search, stream, and download music, while administrators manage songs, genres, and content.
 
 ---
 
-## 🚀 Features
+##  Features
 - User registration and login with role-based access
 - Browse songs by title, artist, or genre
 - Stream songs directly in the browser using an HTML5 audio player
@@ -17,14 +17,14 @@ Users can browse, search, stream, and download music, while administrators manag
 
 ---
 
-## 📐 Project Documentation
-- 📄 [Requirements](docs/requirements.md) – functional and non-functional requirements  
-- 🏗️ [Architecture](docs/architecture.md) – system architecture and layers  
-- 🗄️ [Entity Diagram](docs/entity-diagram.md) – database ERD and entity descriptions  
+##  Project Documentation
+-  [Requirements](docs/requirements.md) – functional and non-functional requirements  
+-  [Architecture](docs/architecture.md) – system architecture and layers, database ERD and entity descriptions   
+  
 
 ---
 
-## 🛠️ Technology Stack
+##  Technology Stack
 - **Framework:** ASP.NET Core MVC (.NET 9)  
 - **Database:** SQL Server with Entity Framework Core  
 - **Authentication & Authorization:** ASP.NET Identity (role-based)  
