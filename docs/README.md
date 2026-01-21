@@ -12,7 +12,6 @@ Users can browse, search, stream, and download music, while administrators manag
 - Download songs
 - Admin dashboard to add, edit, and delete songs
 - Upload and manage cover images for songs
-- Playlist management (optional enhancement)
 - Search functionality with real-time filtering
 
 ---

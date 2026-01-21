@@ -19,7 +19,6 @@
 - **Services:** Handle operations such as:
   - Song management (add, edit, delete)
   - Favorite and like handling
-  - Playlist creation and management
   - Search functionality
   - Streaming and download logic
 - **Validation:** Ensures correct input before data persistence.

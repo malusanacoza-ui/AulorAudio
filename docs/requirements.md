@@ -1,8 +1,8 @@
 ﻿# Requirements — AuloraAudio
 
 ## Stakeholders
-- **Listeners (Users):** browse music, search, stream, download, manage playlists.
-- **Administrators:** upload songs, manage artists, genres, and content.
+- **Listeners (Users):** browse music, search, stream, download, like, pick their favorite song.
+- **Administrators:** upload songs, genres, and content.
 - **System Administrator:** manage users, roles, and system configuration (ASP.NET Identity).
 
 ---
@@ -14,7 +14,6 @@
 - Stream songs using an in-browser audio player
 - Download songs for offline use
 - View song details (cover image, artist, genre)
-- Manage playlists (optional enhancement)
 - Admin can add, edit, and delete songs
 - Admin can upload audio files and cover images
 
