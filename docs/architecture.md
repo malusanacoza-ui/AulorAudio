@@ -69,14 +69,10 @@
 
 ```mermaid
 erDiagram
-    USER ||--o{ PLAYLIST : owns
     USER ||--o{ FAVORITE_SONG : favorites
     USER ||--o{ SONG_LIKE : likes
     SONG ||--o{ FAVORITE_SONG : favorited_in
     SONG ||--o{ SONG_LIKE : liked_in
-    SONG }o--|| GENRE : belongs_to
-    SONG ||--o{ PLAYLIST_ITEM : included_in
-    PLAYLIST ||--o{ PLAYLIST_ITEM : contains
 
     USER {
         string Id
@@ -91,23 +87,6 @@ erDiagram
         string Artist
         string FilePath
         string ImagePath
-    }
-
-    GENRE {
-        int Id
-        string Name
-    }
-
-    PLAYLIST {
-        int Id
-        string Name
-        string UserId
-    }
-
-    PLAYLIST_ITEM {
-        int Id
-        int PlaylistId
-        int SongId
     }
 
     FAVORITE_SONG {
