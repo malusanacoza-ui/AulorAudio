@@ -1,4 +1,4 @@
-﻿# AulorAudio – Music Streaming Web Application
+﻿# AulorAudio 
 
 A music streaming and download web application built with **ASP.NET Core MVC**.  
 Users can browse, search, stream, and download music, while administrators manage songs, genres, and content.

@@ -1,4 +1,4 @@
-﻿# Requirements — Music Streaming Web Application
+﻿# Requirements — AuloraAudio
 
 ## Stakeholders
 - **Listeners (Users):** browse music, search, stream, download, manage playlists.

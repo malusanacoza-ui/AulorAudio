@@ -1,4 +1,4 @@
-﻿# Music Streaming Web Application — System Architecture
+﻿# AulorAudio — System Architecture
 
 ## Architecture Pattern
 - **ASP.NET Core MVC (Model–View–Controller)**
@@ -71,7 +71,7 @@
 
 ---
 
-# Entity Relationship Diagram — Music Streaming Web Application
+# Entity Relationship Diagram — AulorAudio
 
 ```mermaid
 erDiagram
